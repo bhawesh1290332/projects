@@ -1,11 +1,19 @@
 # projects
 Projects about finance and other topics which i find interesting and intriguing.
+
+
 1. Poker Bot
    Here We have created a simple Poker Bot which plays based on calculated expected returns based on probabilities calculated using monte carlo approximation of 450 iterations. Detailed explanations are present in the Doc Explanation of Code and Quantitative Logic.
+
+
 2. Volatility Engine
    The VolatilityEngine.ipynb notebook implements a machine learning-based approach to predict stock market volatility. It follows a standard quantitative finance workflow, moving from raw data acquisition to strategy backtesting.Here is an overview of the steps performed in the code:
+
    a) Data Acquisition and PreprocessingThe code begins by fetching historical stock data using the yfinance library.
    Data Retrieval: It downloads ticker data (e.g., "RGC") and saves it locally as a CSV file to avoid redundant API calls.Log Returns: It calculates "Log Returns" (the natural logarithm of the price ratio between consecutive days), which is a standard practice in finance for normalizing price changes.
+
    b) Feature Engineering: Volatility CalculationThe core of the notebook is a custom implementation of an annualized rolling volatility formula.Rolling Window ($M$): It calculates volatility over a specific window (e.g., 20 trading days) using a formula that incorporates log returns and a time step ($dt$) to annualize the value.Lagged Features: It creates additional features like Lagged_Sq_Return (previous day's return squared) to help the model identify recent shocks in the market.
+
    c) Model Development and TrainingThe notebook treats volatility prediction as a supervised learning regression problem.Target Variable: It defines a "target" which is the actual realized volatility of the next 5 trading days.Train/Test Split: It uses a time-series split (splitting by date rather than random shuffling) to ensure the model is tested on "future" data it hasn't seen before.Random Forest Regressor: It trains a Random Forest model using the calculated features to predict the upcoming week's volatility.
+
    d) Evaluation and BacktestingThe code evaluates the model's performance against a "Baseline" (the assumption that next week's volatility will simply be the same as today's).Error Metrics: It uses Root Mean Squared Error (RMSE) to compare the ML model against the baseline.Visual Analysis: The notebook generates a cumulative PnL (Profit and Loss) plot to simulate how a "Volatility Arbitrage" strategy using straddles would have performed based on these predictions. 
